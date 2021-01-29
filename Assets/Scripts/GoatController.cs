@@ -4,10 +4,10 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class GoatController : MonoBehaviour
 {
-	[SerializeField] private Rigidbody2D _rigidbody2D;
 	[SerializeField] private float _speed = 1f;
 	[SerializeField] private GameObject _cone;
 
+	private Rigidbody2D _rigidbody2D;
 	private void Awake()
 	{
 		_rigidbody2D = GetComponent<Rigidbody2D>();

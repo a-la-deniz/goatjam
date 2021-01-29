@@ -201,6 +201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody2D: {fileID: 0}
   _speed: 5
+  _cone: {fileID: 1022738908}
 --- !u!4 &312126477
 Transform:
   m_ObjectHideFlags: 0

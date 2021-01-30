@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mamaGoatAttachmentPoint: {fileID: 632565041196279466}
+  _maxCarry: 2
 --- !u!1 &5310983311525311580
 GameObject:
   m_ObjectHideFlags: 0

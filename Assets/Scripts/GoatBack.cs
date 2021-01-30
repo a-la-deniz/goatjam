@@ -4,34 +4,37 @@ using UnityEngine;
 
 public class GoatBack : MonoBehaviour
 {
-    [SerializeField] private Transform _mamaGoatAttachmentPoint;
+	[SerializeField] private Transform _mamaGoatAttachmentPoint;
+	[SerializeField] private int _maxCarry;
 
-    private Stack<GoatKid> _goatKids;
+	private Stack<GoatKid> _goatKids;
 
-    public Transform TopAttachPoint =>
-        _goatKids.Count == 0 ? _mamaGoatAttachmentPoint : _goatKids.Peek().AttachmentPoint;
+	public Transform TopAttachPoint =>
+		_goatKids.Count == 0 ? _mamaGoatAttachmentPoint : _goatKids.Peek().AttachmentPoint;
 
-    private void Awake()
-    {
-        _goatKids = new Stack<GoatKid>();
-    }
+	public bool HasSpace => _goatKids.Count < _maxCarry;
 
-    private void OnDestroy()
-    {
-        _goatKids.Clear();
-    }
+	private void Awake()
+	{
+		_goatKids = new Stack<GoatKid>();
+	}
 
-    public void Attach(GoatKid goat)
-    {
-        _goatKids.Push(goat);
-    }
+	private void OnDestroy()
+	{
+		_goatKids.Clear();
+	}
 
-    public void DetachAllKids(GoatPen pen)
-    {
-        // Do as animation and with more info to not detach them all in the same spot
-        while (_goatKids.Count > 0)
-        {
-            _goatKids.Pop().Detach(pen);
-        }
-    }
+	public void Attach(GoatKid goat)
+	{
+		_goatKids.Push(goat);
+	}
+
+	public void DetachAllKids(GoatPen pen)
+	{
+		// Do as animation and with more info to not detach them all in the same spot
+		while (_goatKids.Count > 0)
+		{
+			_goatKids.Pop().Detach(pen);
+		}
+	}
 }

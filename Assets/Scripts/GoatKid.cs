@@ -139,6 +139,7 @@ public class GoatKid : MonoBehaviour
 	public void JumpFromBush()
 	{
 		_state = GoatKidState.JumpingOut;
+		_collider.enabled = false;
 
 		DOTween.Kill(_tweenId);
 		DOTween.Sequence()
@@ -172,6 +173,7 @@ public class GoatKid : MonoBehaviour
 		if (!_mamaGoat.Back.HasSpace)
 		{
 			_state = GoatKidState.OutHadNoSpace;
+			_collider.enabled = true;
 			Debug.Log($"{this} can't jump on mama goat, no room", this);
 			return;
 		}
@@ -189,7 +191,6 @@ public class GoatKid : MonoBehaviour
 
 		_mamaGoat.Back.Attach(this);
 		_mamaGoat = null;
-		_collider.enabled = false;
 	}
 
 	private void OnMother()

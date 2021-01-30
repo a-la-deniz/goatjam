@@ -59,6 +59,7 @@ public class GameController : MonoBehaviour
 
 	public void WinGame()
 	{
+		if (State != GameState.Playing) return;
 		Debug.Log("Game won!");
 		State = GameState.Won;
 		OnStateChanged?.Invoke(State);

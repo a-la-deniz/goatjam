@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Win : MonoBehaviour
+public class EndResult : MonoBehaviour
 {
 	[SerializeField] private GameController _game;
 	[SerializeField] private TMP_Text _win;
@@ -22,10 +22,18 @@ public class Win : MonoBehaviour
 
 	private void OnStateChanged(GameController.GameState state)
 	{
-		if (state != GameController.GameState.Won) return;
-		var span = TimeSpan.FromSeconds(_game.TimeLeft);
-		var text = span.ToString("m':'ss':'ff");
-		_win.text = $"You win with {text} time left!";
-		gameObject.SetActive(true);
+		switch(state)
+		{
+			case GameController.GameState.Won:
+				var span = TimeSpan.FromSeconds(_game.TimeLeft);
+				var text = span.ToString("m':'ss':'ff");
+				_win.text = $"You win with {text} time left!";
+				gameObject.SetActive(true);
+				break;
+			case GameController.GameState.Lost:
+				_win.text = $"You lose, boooooo!";
+				gameObject.SetActive(true);
+				break;
+		}
 	}
 }

@@ -350,7 +350,7 @@ GameObject:
   - component: {fileID: 516433447}
   - component: {fileID: 516433448}
   m_Layer: 0
-  m_Name: Time
+  m_Name: '[GAME]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1571,6 +1571,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pen
       objectReference: {fileID: 0}
+    - target: {fileID: 6356082538370750865, guid: d3d71d197ea0c80499f2f2bdb71f5636,
+        type: 3}
+      propertyPath: _game
+      value: 
+      objectReference: {fileID: 516433448}
     - target: {fileID: 6356082538370750869, guid: d3d71d197ea0c80499f2f2bdb71f5636,
         type: 3}
       propertyPath: m_RootOrder

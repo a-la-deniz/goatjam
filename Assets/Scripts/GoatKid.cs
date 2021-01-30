@@ -21,7 +21,7 @@ public class GoatKid : MonoBehaviour
 
     /// <summary>
     /// Respond by screaming
-    /// </summary>
+    /// </summary>AS
     public void RespondToParent(GoatController mamaGoat)
 	{
 		// Play SFX
@@ -50,12 +50,13 @@ public class GoatKid : MonoBehaviour
         _collider.enabled = false;
     }
 
-    public void Detach()
+    public void Detach(GoatPen pen)
     {
         // TODO Move to certain defined positions on the pen or something
         var randomOffset = new Vector3(Random.Range(1f, 3f), Random.Range(1f, 3f), 0f);
-        transform.position = transform.parent.position + randomOffset;
+        transform.position = pen.transform.position + randomOffset;
         transform.parent = null;
-        _collider.enabled = true;
+
+        pen.ReturnGoat();
     }
 }

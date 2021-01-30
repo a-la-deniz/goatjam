@@ -26,12 +26,12 @@ public class GoatBack : MonoBehaviour
         _goatKids.Push(goat);
     }
 
-    public void DetachAllKids()
+    public void DetachAllKids(GoatPen pen)
     {
         // Do as animation and with more info to not detach them all in the same spot
         while (_goatKids.Count > 0)
         {
-            _goatKids.Pop().Detach();
+            _goatKids.Pop().Detach(pen);
         }
     }
 }

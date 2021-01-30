@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameTime : MonoBehaviour
+public class GameController : MonoBehaviour
 {
     [SerializeField] private float _gameTime;
 
@@ -21,5 +21,10 @@ public class GameTime : MonoBehaviour
             Debug.Log("Game over, time up!");
             gameObject.SetActive(false);
         }
+    }
+
+    public void WinGame()
+    {
+        Debug.Log("Game won!");
     }
 }

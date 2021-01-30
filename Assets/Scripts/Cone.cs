@@ -15,13 +15,8 @@ public class Cone : MonoBehaviour
 														};
 
 	[ContextMenu("GetOverlap")]
-	private void GetOverlap()
+	public void GetOverlap(List<Collider2D> results)
 	{
-		var l = new List<Collider2D>();
-		Physics2D.OverlapCollider(_polygonCollider2D, _contactFilter2D, l);
-		foreach (var collider2D1 in l)
-		{
-			Debug.Log(collider2D1.name, collider2D1.gameObject);
-		}
+		Physics2D.OverlapCollider(_polygonCollider2D, _contactFilter2D, results);
 	}
 }

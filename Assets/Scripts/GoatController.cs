@@ -24,7 +24,7 @@ public class GoatController : MonoBehaviour
 
 	private void Update()
 	{
-		var direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+		var direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
 		_rigidbody2D.velocity = direction.normalized * _speed;
 
@@ -52,12 +52,12 @@ public class GoatController : MonoBehaviour
 
 			foreach (var goatKid in goatKidsToAppear)
 			{
-				goatKid.Appear();
+				goatKid.Appear(this);
 			}
 
 			foreach (var goatKid in goatKidsToRespond)
 			{
-				goatKid.RespondToParent();
+				goatKid.RespondToParent(this);
 			}
 		}
 

@@ -40,6 +40,11 @@ public class GoatKid : MonoBehaviour
 
 		// Jump on parent
         var back = mamaGoat.GetComponent<GoatBack>();
+        if (!back.HasSpace)
+        {
+            Debug.Log($"{this} can't jump on mama goat, no room", this);
+            return;
+        }
 
         // Do as corroutine, tween or something
         // Animate and block mama goat movement until complete

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9138562619558253088}
   - component: {fileID: 7468689712713563974}
   - component: {fileID: 977818053364165485}
+  - component: {fileID: 4116939485187827364}
   m_Layer: 0
   m_Name: ScreamFX
   m_TagString: Untagged
@@ -191,3 +192,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!114 &4116939485187827364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3251838380503256391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3fedaa76e5b79e4f99d3374bb3578e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: {fileID: 7263263865592180075}
+  _baaas:
+  - Baaaaaa!
+  - Babababaaaa!
+  - Baaa!
+  - AAAAAAAAAHHH!
+  - AAAAHHAAA!
+  - BBHHAAA!
+  - Baaa!
+  - MHHHAAAHHAA!
+  - Agggaaa!!
+  - BAAABABABABA!

@@ -5,11 +5,9 @@ using UnityEngine;
 public class GoatController : MonoBehaviour
 {
 	[SerializeField] private float      _speed = 1f;
-	[SerializeField] private GameObject _cone;
+	[SerializeField] private Cone _cone;
 
 	private Rigidbody2D _rigidbody2D;
-
-	public GameObject Cone => _cone;
 
 	private void Awake()
 	{

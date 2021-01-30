@@ -1,16 +1,20 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(GoatController))]
-public class GoatControllerEditor : Editor
+[CustomEditor(typeof(Cone))]
+public class ConeEditor : Editor
 {
 	public override void OnInspectorGUI()
 	{
 		base.OnInspectorGUI();
 
-		var goatController = (GoatController) target;
-		var collider = goatController.GetComponentInChildren<PolygonCollider2D>();
-		var spriteRenderer = collider.GetComponentInChildren<SpriteRenderer>();
+		var cone = (Cone) target;
+		var collider = cone.PolygonCollider2D;
+		if (collider == null)
+		{
+			collider = cone.GetComponentInChildren<PolygonCollider2D>();
+		}
+
 		var pts = collider.points;
 
 		if (pts.Length != 3)
@@ -40,7 +44,7 @@ public class GoatControllerEditor : Editor
 		pts[2].x = -pts[2].x;
 		var defaultX = 0.64f;
 		var defaultY = 0.64f;
-		spriteRenderer.transform.parent.localScale = new Vector3(pts[1].x * 2 / defaultX, range / defaultY, 1);
+		cone.SpriteRoot.localScale = new Vector3(pts[1].x * 2 / defaultX, range / defaultY, 1);
 		collider.points = pts;
 	}
 }

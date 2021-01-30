@@ -166,12 +166,12 @@ public class GoatKid : MonoBehaviour
 
 		_state = GoatKidState.JumpingOnMother;
 
-		transform.position = _mamaGoat.Back.TopAttachPoint.position;
 		transform.parent = _mamaGoat.transform;
+		var local = _mamaGoat.transform.InverseTransformPoint(_mamaGoat.Back.TopAttachPoint.position);
 
 		DOTween.Kill(_tweenId);
 		DOTween.Sequence()
-			.Append(transform.DOMove(_mamaGoat.Back.TopAttachPoint.position, 0.25f))
+			.Append(transform.DOLocalMove(local, 0.25f))
 			.OnComplete(OnMother)
 			.SetId(_tweenId);
 

@@ -47,13 +47,8 @@ public class GoatKid : MonoBehaviour
 			var edgeScale = 1.0f / Mathf.Max(Mathf.Abs(kidOnClipX), Mathf.Abs(kidOnClipY));
 			var responseOnClipX = kidOnClipX * edgeScale;
 			var responseOnClipY = kidOnClipY * edgeScale;
-			var responseOnViewport = new Vector3(responseOnClipX.Remap(-1, 1, 0, 1),
-					responseOnClipY.Remap(-1, 1, 0, 1),
-					kidOnViewport.z);
-
-			var responseOnWorld = mainCamera.ViewportToWorldPoint(responseOnViewport);
-
-			// TODO: visualize response on responseOnWorld position
+			
+			ScreamVisualsProvider.CreateScream(responseOnClipX, responseOnClipY, kidOnViewport.z);
 		}
 
 		// Propagate Visual

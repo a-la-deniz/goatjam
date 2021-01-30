@@ -206,7 +206,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attachmentPoint: {fileID: 4319492632296865668}
   _spriteRenderer: {fileID: 3866224446209856909}
-  _scream: {fileID: 8300000, guid: f51d7fd90b506de42959f0754e9a86ba, type: 3}
   _source: {fileID: 3434771150270332397}
 --- !u!61 &3866224445644635374
 BoxCollider2D:
@@ -259,8 +258,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3866224446209856624}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.09475789, y: 0.09475789, z: 0.09475789}
+  m_LocalPosition: {x: 0, y: 0.035, z: 0}
+  m_LocalScale: {x: 0.10802399, y: 0.10802399, z: 0.10802399}
   m_Children: []
   m_Father: {fileID: 3866224445644635375}
   m_RootOrder: 0
@@ -304,7 +303,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: da0ec0e2c628e62469daa0f49f69d626, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 82476d38d8fcd8e4dae4ef6be6435683, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

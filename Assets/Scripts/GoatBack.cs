@@ -5,16 +5,15 @@ using UnityEngine;
 public class GoatBack : MonoBehaviour
 {
 	[SerializeField] private Transform _mamaGoatAttachmentPoint;
-	[SerializeField] private int _maxCarry;
+	[SerializeField] private List<Transform> _attachmentPoints;
 
 	private Stack<GoatKid> _goatKids;
 
 	public IReadOnlyCollection<GoatKid> GoatKids => _goatKids;
 
-	public Transform TopAttachPoint =>
-		_goatKids.Count == 0 ? _mamaGoatAttachmentPoint : _goatKids.Peek().AttachmentPoint;
+	public Transform TopAttachPoint => _attachmentPoints[_goatKids.Count];
 
-	public bool HasSpace => _goatKids.Count < _maxCarry;
+	public bool HasSpace => _goatKids.Count < _attachmentPoints.Count;
 
 	private void Awake()
 	{

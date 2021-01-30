@@ -205,6 +205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attachmentPoint: {fileID: 4319492632296865668}
+  _spriteRenderer: {fileID: 3866224446209856909}
   _scream: {fileID: 8300000, guid: f51d7fd90b506de42959f0754e9a86ba, type: 3}
   _source: {fileID: 3434771150270332397}
 --- !u!61 &3866224445644635374

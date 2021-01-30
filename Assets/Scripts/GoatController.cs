@@ -6,9 +6,11 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(GoatBack))]
 public class GoatController : MonoBehaviour
 {
-	[SerializeField] private float _speed = 1f;
-	[SerializeField] private Cone  _closeCone;
-	[SerializeField] private Cone  _farCone;
+	[SerializeField] private float          _speed = 1f;
+	[SerializeField] private Cone           _closeCone;
+	[SerializeField] private Cone           _farCone;
+	[SerializeField] private SpriteRenderer _spriteRenderer;
+
 
 	[Header("Sfx")]
 	[SerializeField] private AudioClip _scream;
@@ -57,8 +59,8 @@ public class GoatController : MonoBehaviour
 													  .Where(g => g != null);
 
 			var goatKidsToRespond = _farScreamResults.Select(r => r.gameObject.GetComponent<GoatKid>())
-													   .Where(g => g != null)
-													   .Except(goatKidsToAppear);
+													 .Where(g => g != null)
+													 .Except(goatKidsToAppear);
 
 			foreach (var goatKid in goatKidsToAppear)
 			{
@@ -74,6 +76,12 @@ public class GoatController : MonoBehaviour
 		}
 
 		_previousScream = scream;
+
+		_spriteRenderer.sortingOrder = (int)(_spriteRenderer.bounds.min).y * -1;
+		foreach (var backGoatKid in Back.GoatKids)
+		{
+			backGoatKid.SpriteRenderer.sortingOrder = _spriteRenderer.sortingOrder;
+		}
 	}
 
 	private void PlayScream()

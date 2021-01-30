@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8387509069741809166}
   - component: {fileID: 829667238429215953}
-  - component: {fileID: 7143664787967337602}
   - component: {fileID: 5166556243358959711}
+  - component: {fileID: 1323270584501679539}
+  - component: {fileID: 6142837550259539934}
   m_Layer: 0
   m_Name: Bush
   m_TagString: Untagged
@@ -83,14 +84,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &7143664787967337602
-BoxCollider2D:
+--- !u!114 &5166556243358959711
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2422605863977077486}
-  m_Enabled: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98b54c46ea211be4a9833e8d1e4620cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1323270584501679539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2422605863977077486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b5fc2f69321bb8439ae04ab7ec537c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!60 &6142837550259539934
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2422605863977077486}
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -106,18 +131,9 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 10.42, y: 6.54}
-  m_EdgeRadius: 0
---- !u!114 &5166556243358959711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2422605863977077486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98b54c46ea211be4a9833e8d1e4620cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Points:
+    m_Paths:
+    - - {x: -3.4369237, y: 0.9613427}
+      - {x: 3.5600052, y: 0.8853593}
+      - {x: 4.5974627, y: -1.3338101}
+      - {x: -4.3656664, y: -1.3450351}

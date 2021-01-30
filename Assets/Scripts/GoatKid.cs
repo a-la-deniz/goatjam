@@ -42,6 +42,8 @@ public class GoatKid : MonoBehaviour
 	private object _tweenId = new object();
 	private object _delayedScream = new object();
 
+	public SpriteRenderer SpriteRenderer => _spriteRenderer;
+
 	private void Awake()
 	{
 		_collider = GetComponent<Collider2D>();

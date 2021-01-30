@@ -9,8 +9,9 @@ public class GoatKid : MonoBehaviour
     /// Transform where other goats can pile up
     /// </summary>
     [SerializeField] private Transform _attachmentPoint;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
 
-    public Transform AttachmentPoint => _attachmentPoint;
+	public Transform AttachmentPoint => _attachmentPoint;
 
     private Collider2D _collider;
 
@@ -19,16 +20,24 @@ public class GoatKid : MonoBehaviour
         _collider = GetComponent<Collider2D>();
     }
 
-    /// <summary>
-    /// Respond by screaming
-    /// </summary>AS
-    public void RespondToParent(GoatController mamaGoat)
+	/// <summary>
+	/// Respond by screaming
+	/// </summary>AS
+	public void RespondToParent(GoatController mamaGoat, Plane[] cameraFrustum)
 	{
 		// Play SFX
-		Debug.Log($"{this} should respond to parent now", this);
+		if (GeometryUtility.TestPlanesAABB(cameraFrustum, _spriteRenderer.bounds))
+		{
+			Debug.Log($"{this} should respond to parent now ON SCREEN", this);
+		}
+		else
+		{
+			Debug.Log($"{this} should respond to parent now OFF SCREEN", this);
+		}
 
 		// Propagate Visual
 	}
+
 
 	/// <summary>
 	/// Stop hiding behind bush, etc.

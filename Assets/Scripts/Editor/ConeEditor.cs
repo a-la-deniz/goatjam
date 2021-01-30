@@ -35,7 +35,7 @@ public class ConeEditor : Editor
 
 		var range = (pts[0] - (pts[1] + pts[2]) * 0.5f).magnitude;
 		range = EditorGUILayout.FloatField("Cone Range", range);
-		range = Mathf.Clamp(range, 0.01f, 10f);
+		range = Mathf.Clamp(range, 0.01f, 100f);
 
 		pts[0] = new Vector2(0, 0);
 		pts[1].x = range * Mathf.Tan(Mathf.Deg2Rad * angle * 0.5f);

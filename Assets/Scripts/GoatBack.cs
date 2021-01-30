@@ -9,6 +9,8 @@ public class GoatBack : MonoBehaviour
 
 	private Stack<GoatKid> _goatKids;
 
+	public IReadOnlyCollection<GoatKid> GoatKids => _goatKids;
+
 	public Transform TopAttachPoint =>
 		_goatKids.Count == 0 ? _mamaGoatAttachmentPoint : _goatKids.Peek().AttachmentPoint;
 

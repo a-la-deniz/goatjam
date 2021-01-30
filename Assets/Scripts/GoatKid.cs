@@ -5,27 +5,32 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class GoatKid : MonoBehaviour
 {
-    /// <summary>
-    /// Transform where other goats can pile up
-    /// </summary>
-    [SerializeField] private Transform _attachmentPoint;
+	/// <summary>
+	/// Transform where other goats can pile up
+	/// </summary>
+	[SerializeField] private Transform _attachmentPoint;
 
-    public Transform AttachmentPoint => _attachmentPoint;
+	[Header("SFX")]
+	[SerializeField] private AudioClip _scream;
+	[SerializeField] private AudioSource _source;
 
-    private Collider2D _collider;
+	public Transform AttachmentPoint => _attachmentPoint;
 
-    private void Awake()
-    {
-        _collider = GetComponent<Collider2D>();
-    }
+	private Collider2D _collider;
 
-    /// <summary>
-    /// Respond by screaming
-    /// </summary>AS
-    public void RespondToParent(GoatController mamaGoat)
+	private void Awake()
+	{
+		_collider = GetComponent<Collider2D>();
+	}
+
+	/// <summary>
+	/// Respond by screaming
+	/// </summary>AS
+	public void RespondToParent(GoatController mamaGoat)
 	{
 		// Play SFX
 		Debug.Log($"{this} should respond to parent now", this);
+		_source.PlayOneShot(_scream);
 
 		// Propagate Visual
 	}
@@ -39,29 +44,29 @@ public class GoatKid : MonoBehaviour
 		// Play animation
 
 		// Jump on parent
-        var back = mamaGoat.GetComponent<GoatBack>();
-        if (!back.HasSpace)
-        {
-            Debug.Log($"{this} can't jump on mama goat, no room", this);
-            return;
-        }
+		var back = mamaGoat.GetComponent<GoatBack>();
+		if (!back.HasSpace)
+		{
+			Debug.Log($"{this} can't jump on mama goat, no room", this);
+			return;
+		}
 
-        // Do as corroutine, tween or something
-        // Animate and block mama goat movement until complete
-        transform.position = back.TopAttachPoint.position;
-        transform.parent = mamaGoat.transform;
+		// Do as corroutine, tween or something
+		// Animate and block mama goat movement until complete
+		transform.position = back.TopAttachPoint.position;
+		transform.parent = mamaGoat.transform;
 
-        back.Attach(this);
-        _collider.enabled = false;
-    }
+		back.Attach(this);
+		_collider.enabled = false;
+	}
 
-    public void Detach(GoatPen pen)
-    {
-        // TODO Move to certain defined positions on the pen or something
-        var randomOffset = new Vector3(Random.Range(1f, 3f), Random.Range(1f, 3f), 0f);
-        transform.position = pen.transform.position + randomOffset;
-        transform.parent = null;
+	public void Detach(GoatPen pen)
+	{
+		// TODO Move to certain defined positions on the pen or something
+		var randomOffset = new Vector3(Random.Range(1f, 3f), Random.Range(1f, 3f), 0f);
+		transform.position = pen.transform.position + randomOffset;
+		transform.parent = null;
 
-        pen.ReturnGoat();
-    }
+		pen.ReturnGoat();
+	}
 }

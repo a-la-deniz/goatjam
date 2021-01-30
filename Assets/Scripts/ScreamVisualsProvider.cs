@@ -23,7 +23,7 @@ public class ScreamVisualsProvider : MonoBehaviour
 	private static readonly Queue<Tuple<float, RectTransform>> Screams = new Queue<Tuple<float, RectTransform>>();
 
 
-	public static void CreateScream(float clipX, float clipY, float viewportZ)
+	public static void CreateScream(float clipX, float clipY)
 	{
 		var instance = Instance;
 		var mainCamera = Camera.main;
@@ -32,7 +32,7 @@ public class ScreamVisualsProvider : MonoBehaviour
 
 		var responseOnViewport = new Vector3(clipX.Remap(-1, 1, 0, 1),
 				clipY.Remap(-1, 1, 0, 1),
-				viewportZ);
+				10f);
 
 		var responseOnWorld = mainCamera.ViewportToWorldPoint(responseOnViewport);
 

@@ -78,7 +78,7 @@ public class GoatKid : MonoBehaviour
 			var responseOnClipX = kidOnClipX * edgeScale;
 			var responseOnClipY = kidOnClipY * edgeScale;
 			
-			ScreamVisualsProvider.CreateScream(responseOnClipX, responseOnClipY, kidOnViewport.z);
+			ScreamVisualsProvider.CreateScream(responseOnClipX, responseOnClipY);
 		}
 
 		// Propagate Visual

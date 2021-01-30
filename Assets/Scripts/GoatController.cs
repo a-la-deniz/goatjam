@@ -59,7 +59,7 @@ public class GoatController : MonoBehaviour
 
 			foreach (var goatKid in goatKidsToRespond)
 			{
-				goatKid.RespondToParent(this, camFrustum);
+				goatKid.RespondToParent(this, camFrustum, mainCamera);
 			}
 		}
 

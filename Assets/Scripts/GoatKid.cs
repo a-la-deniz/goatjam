@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Util;
 
 [RequireComponent(typeof(Collider2D))]
 public class GoatKid : MonoBehaviour
@@ -23,7 +24,7 @@ public class GoatKid : MonoBehaviour
 	/// <summary>
 	/// Respond by screaming
 	/// </summary>AS
-	public void RespondToParent(GoatController mamaGoat, Plane[] cameraFrustum)
+	public void RespondToParent(GoatController mamaGoat, Plane[] cameraFrustum, Camera mainCamera)
 	{
 		// Play SFX
 		if (GeometryUtility.TestPlanesAABB(cameraFrustum, _spriteRenderer.bounds))
@@ -33,6 +34,21 @@ public class GoatKid : MonoBehaviour
 		else
 		{
 			Debug.Log($"{this} should respond to parent now OFF SCREEN", this);
+			var kidTransform = transform;
+			var kidPosition = kidTransform.position;
+			var kidOnViewport = mainCamera.WorldToViewportPoint(kidPosition);
+			var kidOnClipX = kidOnViewport.x.Remap(0, 1, -1, 1);
+			var kidOnClipY = kidOnViewport.y.Remap(0, 1, -1, 1);
+			var edgeScale = 1.0f / Mathf.Max(Mathf.Abs(kidOnClipX), Mathf.Abs(kidOnClipY));
+			var responseOnClipX = kidOnClipX * edgeScale;
+			var responseOnClipY = kidOnClipY * edgeScale;
+			var responseOnViewport = new Vector3(responseOnClipX.Remap(-1, 1, 0, 1),
+					responseOnClipY.Remap(-1, 1, 0, 1), 
+					kidOnViewport.z);
+
+			var responseOnWorld = mainCamera.ViewportToWorldPoint(responseOnViewport);
+
+			// TODO: visualize response on responseOnWorld position
 		}
 
 		// Propagate Visual

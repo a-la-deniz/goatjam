@@ -448,6 +448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05384b58b30f6a443a72d9fc66921466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _totalGoats: 0
   _gameTime: 40
 --- !u!1 &519420028
 GameObject:
@@ -738,6 +739,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _screamPrefab: {fileID: 6606386091167033292, guid: 7fc91e9912554744e9882bd4f1e4e62c,
     type: 3}
+  _timeOnScreen: 0
 --- !u!4 &700743600
 Transform:
   m_ObjectHideFlags: 0
@@ -2000,6 +2002,11 @@ PrefabInstance:
       value: Game Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 6563251558424539660, guid: 751656d151fef9241b355f28d8a0065b,
+        type: 3}
+      propertyPath: _game
+      value: 
+      objectReference: {fileID: 516433448}
+    - target: {fileID: 7775076038869775770, guid: 751656d151fef9241b355f28d8a0065b,
         type: 3}
       propertyPath: _game
       value: 

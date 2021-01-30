@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -12,7 +13,7 @@ public class GoatController : MonoBehaviour
 	private Rigidbody2D _rigidbody2D;
 
 	private List<Collider2D> _closeScreamResults = new List<Collider2D>();
-	private List<Collider2D> _farScreamResults = new List<Collider2D>();
+	private List<Collider2D> _farScreamResults   = new List<Collider2D>();
 
 	private bool _previousScream;
 
@@ -36,22 +37,27 @@ public class GoatController : MonoBehaviour
 		_closeCone.transform.rotation = rotation;
 		_farCone.transform.rotation = rotation;
 
-		var scream = Input.GetAxis("Fire1")> 0;
+		var scream = Input.GetAxis("Fire1") > 0;
 		if (!_previousScream && scream)
 		{
 			_closeCone.GetOverlap(_closeScreamResults);
 			_farCone.GetOverlap(_farScreamResults);
 
-			Debug.Log("Things in close range:");
-			foreach (var closeScreamResult in _closeScreamResults)
+			var goatKidsToAppear = _closeScreamResults.Select(r => r.gameObject.GetComponent<GoatKid>())
+													  .Where(g => g != null);
+
+			var goatKidsToRespond = _farScreamResults.Select(r => r.gameObject.GetComponent<GoatKid>())
+													   .Where(g => g != null)
+													   .Except(goatKidsToAppear);
+
+			foreach (var goatKid in goatKidsToAppear)
 			{
-				Debug.Log(closeScreamResult.name, closeScreamResult.gameObject);
+				goatKid.Appear();
 			}
 
-			Debug.Log("Things in far range:");
-			foreach (var farScreamResult in _farScreamResults)
+			foreach (var goatKid in goatKidsToRespond)
 			{
-				Debug.Log(farScreamResult.name, farScreamResult.gameObject);
+				goatKid.RespondToParent();
 			}
 		}
 

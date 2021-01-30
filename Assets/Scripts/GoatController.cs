@@ -28,7 +28,8 @@ public class GoatController : MonoBehaviour
 
 		_rigidbody2D.velocity = direction.normalized * _speed;
 
-		var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		var mainCamera = Camera.main;
+		var mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
 		var diff = transform.position - mousePos;
 
 		float rotZ = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
@@ -40,6 +41,7 @@ public class GoatController : MonoBehaviour
 		var scream = Input.GetAxis("Fire1") > 0;
 		if (!_previousScream && scream)
 		{
+			var camFrustum = GeometryUtility.CalculateFrustumPlanes(mainCamera);
 			_closeCone.GetOverlap(_closeScreamResults);
 			_farCone.GetOverlap(_farScreamResults);
 
@@ -57,7 +59,7 @@ public class GoatController : MonoBehaviour
 
 			foreach (var goatKid in goatKidsToRespond)
 			{
-				goatKid.RespondToParent(this);
+				goatKid.RespondToParent(this, camFrustum, mainCamera);
 			}
 		}
 

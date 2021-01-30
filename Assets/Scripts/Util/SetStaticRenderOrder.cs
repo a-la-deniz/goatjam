@@ -10,6 +10,7 @@ namespace Util
 		private void Awake()
 		{
 			_renderer = GetComponent<Renderer>();
+			if (_renderer == null) _renderer = GetComponentInChildren<Renderer>();
 			_renderer.sortingOrder = (int) (_renderer.bounds.min).y * -1;
 		}
 	}

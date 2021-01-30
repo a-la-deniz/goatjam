@@ -154,7 +154,7 @@ public class GoatKid : MonoBehaviour
 
 	private void JumpOnMother()
 	{
-		if (_state != GoatKidState.Out) return;
+		if (_state != GoatKidState.Out && _state != GoatKidState.OutHadNoSpace) return;
 
 		// Jump on parent
 		if (!_mamaGoat.Back.HasSpace)

@@ -6,7 +6,10 @@ public class GameController : MonoBehaviour
 {
     [SerializeField] private float _gameTime;
 
+    public float TimeLeft => _countdown;
     private float _countdown;
+
+    public bool IsGameOver { get; private set; }
 
     private void Awake()
     {
@@ -19,6 +22,7 @@ public class GameController : MonoBehaviour
         if (_countdown <= 0f)
         {
             Debug.Log("Game over, time up!");
+            IsGameOver = true;
             gameObject.SetActive(false);
         }
     }
@@ -26,5 +30,7 @@ public class GameController : MonoBehaviour
     public void WinGame()
     {
         Debug.Log("Game won!");
+        IsGameOver = true;
+        gameObject.SetActive(false);
     }
 }

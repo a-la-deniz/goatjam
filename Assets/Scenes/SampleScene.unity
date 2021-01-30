@@ -306,35 +306,13 @@ Transform:
   m_Father: {fileID: 1022078127}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &516433446 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6882848248582846376, guid: 4fdde12183c70f744a736570883e2b0d,
-    type: 3}
-  m_PrefabInstance: {fileID: 6882848249015374222}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &516433447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 516433446}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5e18fe41566de94eb38629865fdf26d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _game: {fileID: 516433448}
-  _bushesParent: {fileID: 497198505}
-  _goatKidPrefab: {fileID: 3866224445644635344, guid: 1f88673959593d44ab09dd1b6326d80d,
-    type: 3}
 --- !u!114 &516433448 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6882848248582846374, guid: 4fdde12183c70f744a736570883e2b0d,
     type: 3}
   m_PrefabInstance: {fileID: 6882848249015374222}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 516433446}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05384b58b30f6a443a72d9fc66921466, type: 3}
@@ -1132,6 +1110,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 5222120133229674011, guid: e50e36b2b5e62be42839c79cbbd6b9b8,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5310983310657304024, guid: e50e36b2b5e62be42839c79cbbd6b9b8,
         type: 3}
       propertyPath: m_Name
@@ -1409,6 +1392,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1643543411707356226, guid: 4fdde12183c70f744a736570883e2b0d,
+        type: 3}
+      propertyPath: _bushesParent
+      value: 
+      objectReference: {fileID: 497198505}
     - target: {fileID: 6882848248582846374, guid: 4fdde12183c70f744a736570883e2b0d,
         type: 3}
       propertyPath: _totalGoats

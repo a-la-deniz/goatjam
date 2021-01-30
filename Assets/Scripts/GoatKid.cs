@@ -25,8 +25,8 @@ public class GoatKid : MonoBehaviour
 	[SerializeField] private SpriteRenderer _spriteRenderer;
 
 	[Header("SFX")]
-	[SerializeField] private AudioClip _scream;
 	[SerializeField] private AudioSource _source;
+	private AudioClip _scream;
 
 	public Transform AttachmentPoint => _attachmentPoint;
 
@@ -40,6 +40,7 @@ public class GoatKid : MonoBehaviour
 	private GoatKidState _state = GoatKidState.Hiding;
 
 	private object _tweenId = new object();
+	private object _delayedScream = new object();
 
 	private void Awake()
 	{
@@ -51,6 +52,8 @@ public class GoatKid : MonoBehaviour
 		_mamaGoat = null;
 		DOTween.Kill(_tweenId);
 		_tweenId = null;
+		DOTween.Kill(_delayedScream);
+		_delayedScream = null;
 	}
 
 	/// <summary>
@@ -61,7 +64,9 @@ public class GoatKid : MonoBehaviour
 		if (_state != GoatKidState.Hiding && _state != GoatKidState.OutHadNoSpace) return;
 
 		// Play SFX
-		_source.PlayOneShot(_scream);
+		var delay = Mathf.InverseLerp(0f, 20f, (transform.position - mamaGoat.transform.position).sqrMagnitude);
+		if(!DOTween.IsTweening(_delayedScream))DOVirtual.DelayedCall(0.1f + delay * 0.5f, PlaySfx).SetId(_delayedScream);
+
 		if (GeometryUtility.TestPlanesAABB(cameraFrustum, _spriteRenderer.bounds))
 		{
 			Debug.Log($"{this} should respond to parent now ON SCREEN", this);
@@ -82,6 +87,11 @@ public class GoatKid : MonoBehaviour
 		}
 
 		// Propagate Visual
+	}
+
+	private void PlaySfx()
+	{
+		_source.PlayOneShot(_scream);
 	}
 
 
@@ -184,5 +194,10 @@ public class GoatKid : MonoBehaviour
 	{
 		Debug.Log($"{this} on the mother", this);
 		_state = GoatKidState.OnMother;
+	}
+
+	public void SetScream(AudioClip screamClip)
+	{
+		_scream = screamClip;
 	}
 }

@@ -10,6 +10,8 @@ public class GoatSpawner : MonoBehaviour
 	[SerializeField] private GameObject _bushesParent;
 	[SerializeField] private GameObject _goatKidPrefab;
 
+	[SerializeField] private List<AudioClip> _screamClips;
+
 	private void Awake()
 	{
 		var rnd = new System.Random();
@@ -17,10 +19,13 @@ public class GoatSpawner : MonoBehaviour
 			.GetComponentsInChildren<Bush>()
 			.OrderBy(user => rnd.Next()).Take(_game.TotalGoats).ToList();
 
+		var index = 0;
 		foreach (var bush in bushes)
 		{
 			var goat = Instantiate(_goatKidPrefab, bush.transform.position, Quaternion.identity, null).GetComponent<GoatKid>();
 			goat.HideInBush(bush);
+			goat.SetScream(_screamClips[index]);
+			index = (index + 1) % _screamClips.Count;
 		}
 	}
 }

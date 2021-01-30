@@ -10,6 +10,11 @@ public class GoatController : MonoBehaviour
 	[SerializeField] private Cone  _closeCone;
 	[SerializeField] private Cone  _farCone;
 
+	[Header("Sfx")]
+	[SerializeField] private AudioClip _scream;
+	[SerializeField] private AudioSource _source;
+
+
 	private Rigidbody2D _rigidbody2D;
 
 	private List<Collider2D> _closeScreamResults = new List<Collider2D>();
@@ -64,8 +69,15 @@ public class GoatController : MonoBehaviour
 			{
 				goatKid.RespondToParent(this, camFrustum, mainCamera);
 			}
+
+			PlayScream();
 		}
 
 		_previousScream = scream;
+	}
+
+	private void PlayScream()
+	{
+		_source.PlayOneShot(_scream);
 	}
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class GoatPen : MonoBehaviour
 {
 	[SerializeField] private GameController _game;
-	[SerializeField] private int _goatsToWin;
+	
 	private int _returnedGoats;
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -19,7 +19,7 @@ public class GoatPen : MonoBehaviour
 	public void ReturnGoat()
 	{
 		_returnedGoats++;
-		if (_returnedGoats >= _goatsToWin)
+		if (_returnedGoats >= _game.TotalGoats)
 		{
 			_game.WinGame();
 		}

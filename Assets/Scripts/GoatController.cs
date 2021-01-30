@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(GoatBack))]
 public class GoatController : MonoBehaviour
 {
 	[SerializeField] private float _speed = 1f;
@@ -17,8 +17,11 @@ public class GoatController : MonoBehaviour
 
 	private bool _previousScream;
 
+	public GoatBack Back { get; private set; }
+
 	private void Awake()
 	{
+		Back = GetComponent<GoatBack>();
 		_rigidbody2D = GetComponent<Rigidbody2D>();
 	}
 

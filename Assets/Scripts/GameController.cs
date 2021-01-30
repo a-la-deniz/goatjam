@@ -4,33 +4,63 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+	public enum GameState
+	{
+		None,
+		Playing,
+		Lost,
+		Won
+	}
+
+	[SerializeField] private int _totalGoats;
 	[SerializeField] private float _gameTime;
 
+	public int TotalGoats => _totalGoats;
 	public float TimeLeft => _countdown;
 	private float _countdown;
 
-	public bool IsGameOver { get; private set; }
+	public GameState State { get; private set; }
+
+	public event System.Action<GameState> OnStateChanged;
 
 	private void Awake()
 	{
 		_countdown = _gameTime;
 	}
 
+	private void Start()
+	{
+		// maybe called from something else
+		StartGame();
+	}
+
+	private void OnDestroy()
+	{
+		OnStateChanged = null;
+	}
+
 	private void Update()
 	{
+		if (State != GameState.Playing) return;
 		_countdown -= Time.deltaTime;
 		if (_countdown <= 0f)
 		{
 			Debug.Log("Game over, time up!");
-			IsGameOver = true;
-			gameObject.SetActive(false);
+			State = GameState.Lost;
+			OnStateChanged?.Invoke(State);
 		}
+	}
+
+	public void StartGame()
+	{
+		State = GameState.Playing;
+		OnStateChanged?.Invoke(State);
 	}
 
 	public void WinGame()
 	{
 		Debug.Log("Game won!");
-		IsGameOver = true;
-		gameObject.SetActive(false);
+		State = GameState.Won;
+		OnStateChanged?.Invoke(State);
 	}
 }

@@ -2,10 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Util;
+using DG.Tweening;
 
 [RequireComponent(typeof(Collider2D))]
 public class GoatKid : MonoBehaviour
 {
+	public enum GoatKidState
+	{
+		Hiding,
+		JumpingOut,
+		Out,
+		OutHadNoSpace,
+		JumpingOnMother,
+		OnMother,
+		OnPen
+	}
+
 	/// <summary>
 	/// Transform where other goats can pile up
 	/// </summary>
@@ -20,9 +32,25 @@ public class GoatKid : MonoBehaviour
 
 	private Collider2D _collider;
 
+	private Bush _bush;
+	private float _bushOffsetZ = 2f;
+	private float _bushJumoOffsetY = 2f;
+
+	private GoatController _mamaGoat;
+	private GoatKidState _state = GoatKidState.Hiding;
+
+	private object _tweenId = new object();
+
 	private void Awake()
 	{
 		_collider = GetComponent<Collider2D>();
+	}
+
+	private void OnDestroy()
+	{
+		_mamaGoat = null;
+		DOTween.Kill(_tweenId);
+		_tweenId = null;
 	}
 
 	/// <summary>
@@ -30,6 +58,8 @@ public class GoatKid : MonoBehaviour
 	/// </summary>AS
 	public void RespondToParent(GoatController mamaGoat, Plane[] cameraFrustum, Camera mainCamera)
 	{
+		if (_state != GoatKidState.Hiding && _state != GoatKidState.OutHadNoSpace) return;
+
 		// Play SFX
 		_source.PlayOneShot(_scream);
 		if (GeometryUtility.TestPlanesAABB(cameraFrustum, _spriteRenderer.bounds))
@@ -65,24 +95,19 @@ public class GoatKid : MonoBehaviour
 	/// </summary>
 	public void Appear(GoatController mamaGoat)
 	{
-		Debug.Log($"{this} should appear now", this);
-		// Play animation
+		_mamaGoat = mamaGoat;
 
-		// Jump on parent
-		var back = mamaGoat.GetComponent<GoatBack>();
-		if (!back.HasSpace)
+		if (_state == GoatKidState.Hiding)
 		{
-			Debug.Log($"{this} can't jump on mama goat, no room", this);
-			return;
+			Debug.Log($"{this} jump from bush", this);
+			
+			// Play animation
+			JumpFromBush();
 		}
-
-		// Do as corroutine, tween or something
-		// Animate and block mama goat movement until complete
-		transform.position = back.TopAttachPoint.position;
-		transform.parent = mamaGoat.transform;
-
-		back.Attach(this);
-		_collider.enabled = false;
+		else if (_state == GoatKidState.OutHadNoSpace)
+		{
+			JumpOnMother();
+		}
 	}
 
 	public void Detach(GoatPen pen)
@@ -93,5 +118,76 @@ public class GoatKid : MonoBehaviour
 		transform.parent = null;
 
 		pen.ReturnGoat();
+		_state = GoatKidState.OnPen;
+	}
+
+	public void HideInBush(Bush bush)
+	{
+		_bush = bush;
+		var pos = transform.position;
+		pos.z = _bushOffsetZ + _bushOffsetZ;
+		transform.position = pos;
+	}
+
+	public void JumpFromBush()
+	{
+		_state = GoatKidState.JumpingOut;
+
+		DOTween.Kill(_tweenId);
+		DOTween.Sequence()
+			.Append(transform.DOMoveY(_bushJumoOffsetY, 0.2f).SetRelative())
+			.AppendCallback(() =>
+			{
+				var pos = transform.position;
+				pos.z = _bushOffsetZ - _bushOffsetZ;
+				transform.position = pos;
+			})
+			.Append(transform.DOMoveY(-_bushJumoOffsetY, 0.2f).SetRelative())
+			.OnComplete(OnOutsideBush)
+			.SetId(_tweenId);
+	}
+
+	private void OnOutsideBush()
+	{
+		Debug.Log($"{this} outside the bush", this);
+
+		_bush = null;
+		_state = GoatKidState.Out;
+
+		JumpOnMother();
+	}
+
+	private void JumpOnMother()
+	{
+		if (_state != GoatKidState.Out) return;
+
+		// Jump on parent
+		if (!_mamaGoat.Back.HasSpace)
+		{
+			_state = GoatKidState.OutHadNoSpace;
+			Debug.Log($"{this} can't jump on mama goat, no room", this);
+			return;
+		}
+
+		_state = GoatKidState.JumpingOnMother;
+
+		transform.position = _mamaGoat.Back.TopAttachPoint.position;
+		transform.parent = _mamaGoat.transform;
+
+		DOTween.Kill(_tweenId);
+		DOTween.Sequence()
+			.Append(transform.DOMove(_mamaGoat.Back.TopAttachPoint.position, 0.25f))
+			.OnComplete(OnMother)
+			.SetId(_tweenId);
+
+		_mamaGoat.Back.Attach(this);
+		_mamaGoat = null;
+		_collider.enabled = false;
+	}
+
+	private void OnMother()
+	{
+		Debug.Log($"{this} on the mother", this);
+		_state = GoatKidState.OnMother;
 	}
 }

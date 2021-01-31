@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Cone : MonoBehaviour
@@ -13,6 +14,12 @@ public class Cone : MonoBehaviour
 														{
 																useTriggers = true
 														};
+
+	private void Awake()
+	{
+		var renderer = _spriteRoot.GetComponentInChildren<SpriteRenderer>(true);
+		var material = renderer.material;
+	}
 
 	[ContextMenu("GetOverlap")]
 	public void GetOverlap(List<Collider2D> results)

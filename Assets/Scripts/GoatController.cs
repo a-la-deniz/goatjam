@@ -11,6 +11,7 @@ public class GoatController : MonoBehaviour
 	[SerializeField] private Cone           _closeCone;
 	[SerializeField] private Cone           _farCone;
 	[SerializeField] private SpriteRenderer _spriteRenderer;
+	[SerializeField] private Animator       _animator;
 
 
 	[Header("Sfx")]
@@ -23,7 +24,9 @@ public class GoatController : MonoBehaviour
 	private List<Collider2D> _closeScreamResults = new List<Collider2D>();
 	private List<Collider2D> _farScreamResults   = new List<Collider2D>();
 
-	private bool _previousScream;
+	private                 bool _previousScream;
+	private static readonly int  BHolding = Animator.StringToHash("bHolding");
+	private static readonly int BScreaming = Animator.StringToHash("bScreaming");
 
 	public GoatBack Back { get; private set; }
 
@@ -48,34 +51,30 @@ public class GoatController : MonoBehaviour
 
 		_coneParent.transform.rotation = rotation;
 
-		var scream = Input.GetAxis("Fire1") > 0;
-		if (!_previousScream && scream)
+		var hold = Input.GetAxis("Fire1") > 0;
+
+		// start holding
+		if (!_previousScream && hold && !_source.isPlaying)
 		{
-			var camFrustum = GeometryUtility.CalculateFrustumPlanes(mainCamera);
-			_closeCone.GetOverlap(_closeScreamResults);
-			_farCone.GetOverlap(_farScreamResults);
-
-			var goatKidsToAppear = _closeScreamResults.Select(r => r.gameObject.GetComponent<GoatKid>())
-													  .Where(g => g != null);
-
-			var goatKidsToRespond = _farScreamResults.Select(r => r.gameObject.GetComponent<GoatKid>())
-													 .Where(g => g != null)
-													 .Except(goatKidsToAppear);
-
-			foreach (var goatKid in goatKidsToAppear)
-			{
-				goatKid.Appear(this);
-			}
-
-			foreach (var goatKid in goatKidsToRespond)
-			{
-				goatKid.RespondToParent(this, camFrustum, mainCamera);
-			}
-
-			PlayScream();
+			_animator.SetBool(BHolding, true);
 		}
 
-		_previousScream = scream;
+		// let go
+		if (_previousScream && !hold && _animator.GetBool(BHolding))
+		{
+			DoScream(mainCamera);
+		}
+
+		if (!hold)
+		{
+			_animator.SetBool(BHolding, false);
+		}
+		if (!_source.isPlaying)
+		{
+			_animator.SetBool(BScreaming, false);
+		}
+
+		_previousScream = hold;
 
 		_spriteRenderer.sortingOrder = (int) (_spriteRenderer.bounds.min).y * -1;
 		foreach (var backGoatKid in Back.GoatKids)
@@ -84,8 +83,38 @@ public class GoatController : MonoBehaviour
 		}
 	}
 
+	private void DoScream(Camera mainCamera)
+	{
+		_animator.SetBool(BScreaming, true);
+
+		var camFrustum = GeometryUtility.CalculateFrustumPlanes(mainCamera);
+		_closeCone.GetOverlap(_closeScreamResults);
+		_farCone.GetOverlap(_farScreamResults);
+
+		var goatKidsToAppear = _closeScreamResults.Select(r => r.gameObject.GetComponent<GoatKid>())
+												  .Where(g => g != null);
+
+		var goatKidsToRespond = _farScreamResults.Select(r => r.gameObject.GetComponent<GoatKid>())
+												 .Where(g => g != null)
+												 .Except(goatKidsToAppear);
+
+		foreach (var goatKid in goatKidsToAppear)
+		{
+			goatKid.Appear(this);
+		}
+
+		foreach (var goatKid in goatKidsToRespond)
+		{
+			goatKid.RespondToParent(this, camFrustum, mainCamera);
+		}
+
+		PlayScream();
+	}
+
 	private void PlayScream()
 	{
-		_source.PlayOneShot(_scream);
+		_source.Stop();
+		_source.clip = _scream;
+		_source.Play();
 	}
 }

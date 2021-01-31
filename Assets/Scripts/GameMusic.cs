@@ -9,7 +9,7 @@ public class GameMusic : MonoBehaviour
 	[SerializeField] private AudioClip _gameMusic;
 	[SerializeField] private AudioClip _gameEndMusic;
 
-	private void Start()
+	private void Awake()
 	{
 		_game.OnStateChanged += OnStateChanged;
 	}

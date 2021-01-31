@@ -33,13 +33,14 @@ public class GoatJumpLoop : MonoBehaviour
 	private void LateUpdate()
 	{
 		var stopped = _rb.velocity.sqrMagnitude <= 0.1f;
-		if (stopped) SetFlip(_wasFlipped);
+		var stoppedOnX =  Mathf.Approximately(_rb.velocity.x, 0f);
+		if (stopped || stoppedOnX) SetFlip(_wasFlipped);
 		else SetFlip(_rb.velocity.x >= 0f);
 
 		if (stopped && !_wasStopped)
 		{
 			DOTween.Kill(_tweenId);
-			_jump.flipX = _wasFlipped;
+			SetFlip(_wasFlipped);
 			_jump.transform.DOLocalMoveY(_originalPosition, 0.1f).SetId(_tweenId);
 		}
 		else if (!stopped && _wasStopped)
@@ -52,7 +53,7 @@ public class GoatJumpLoop : MonoBehaviour
 				.SetId(_tweenId);
 		}
 		_wasStopped = stopped;
-		_wasFlipped = _jump.flipX;
+		_wasFlipped = _jump.transform.localScale.x < 0f;
 	}
 
 	private void SetFlip(bool flip)

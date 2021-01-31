@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(GoatBack))]
 public class GoatController : MonoBehaviour
@@ -12,10 +13,12 @@ public class GoatController : MonoBehaviour
 	[SerializeField] private Cone           _farCone;
 	[SerializeField] private SpriteRenderer _spriteRenderer;
 	[SerializeField] private Animator       _animator;
+	[SerializeField, Range(0,1)] private float _rareChance;
 
 
 	[Header("Sfx")]
-	[SerializeField] private AudioClip _scream;
+	[SerializeField] private List<AudioClip> _screamClips;
+	[SerializeField] private List<AudioClip> _rareScreamClips;
 	[SerializeField] private AudioSource _source;
 
 
@@ -130,7 +133,11 @@ public class GoatController : MonoBehaviour
 	private void PlayScream()
 	{
 		_source.Stop();
-		_source.clip = _scream;
+		var rare = Random.value > (1-_rareChance);
+		var randomList = rare ? _rareScreamClips : _screamClips;
+		var i =Random.Range(0, randomList.Count);
+		var clip = randomList[i];
+		_source.clip = clip;
 		_source.Play();
 	}
 }

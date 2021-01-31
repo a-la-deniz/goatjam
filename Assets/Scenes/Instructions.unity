@@ -221,8 +221,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00024414062, y: -0.002746582}
-  m_SizeDelta: {x: 1098.9341, y: 150.23535}
+  m_AnchoredPosition: {x: 0.00024414062, y: -27}
+  m_SizeDelta: {x: 824.698, y: 180.1995}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &227296362
 MonoBehaviour:
@@ -243,16 +243,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'W, A, S, D to move
+  m_text: '<color=#EC5858>W</color>, <color=#EC5858>A</color>, <color=#EC5858>S</color>,
+    <color=#EC5858>D</color> to move
 
-    Mouse to aim + left click to scream
+    <color=#EC5858> CLICK</color> to scream
+    towards your mouse
 
 
-    Get
-    close to the goats and click to grab them
-
-    You can carry up to 2 goats on
-    your back'
+    Move to the bushes where the goats hide  and <color=#EC5858>click</color>
+    to grab them. You can carry up to 2 goats on your back'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4ff3ee0282cfddc4e914c5498ca31cf8, type: 2}
   m_sharedMaterial: {fileID: 6099042051906044893, guid: 4ff3ee0282cfddc4e914c5498ca31cf8,
@@ -280,8 +279,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -446,6 +445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd02d78dc6550964aae490699279bb0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _goToFirstScene: 0
 --- !u!114 &399970210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -995,7 +995,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00024414062, y: 144.99725}
+  m_AnchoredPosition: {x: 0.00024414062, y: 160}
   m_SizeDelta: {x: 840.4673, y: 150.23535}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &934639471

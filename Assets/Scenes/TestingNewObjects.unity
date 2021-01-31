@@ -13687,7 +13687,7 @@ PrefabInstance:
     - target: {fileID: 6563251558288926374, guid: 751656d151fef9241b355f28d8a0065b,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6563251558424539660, guid: 751656d151fef9241b355f28d8a0065b,
         type: 3}
@@ -13713,11 +13713,6 @@ PrefabInstance:
       propertyPath: _bushesParent
       value: 
       objectReference: {fileID: 497198505}
-    - target: {fileID: 6882848248582846374, guid: 4fdde12183c70f744a736570883e2b0d,
-        type: 3}
-      propertyPath: _totalGoats
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 6882848248582846376, guid: 4fdde12183c70f744a736570883e2b0d,
         type: 3}
       propertyPath: m_Name

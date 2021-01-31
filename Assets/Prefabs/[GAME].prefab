@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05384b58b30f6a443a72d9fc66921466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _totalGoats: 0
-  _gameTime: 40
+  _totalGoats: 4
+  _gameTime: 60
 --- !u!114 &1643543411707356226
 MonoBehaviour:
   m_ObjectHideFlags: 0

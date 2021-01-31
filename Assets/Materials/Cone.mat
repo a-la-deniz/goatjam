@@ -76,15 +76,18 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _TotalBlur: 0.001
+    - _TotalEnd: 0.565
+    - _TotalStart: 0
     - _UVSec: 0
-    - _WaveBlur: 0
+    - _WaveBlur: 0.127
     - _WaveBoost: 1
     - _WaveCenter: 0.34
-    - _WaveEnd: 0
-    - _WavePhase: 0
+    - _WaveEnd: 0.376
+    - _WavePhase: -9.87
     - _WaveRange: 0.044
-    - _WaveRepeat: 1
-    - _WaveStart: 0
+    - _WaveRepeat: 12.66
+    - _WaveStart: 0.292
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}

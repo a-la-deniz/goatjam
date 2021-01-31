@@ -61,13 +61,13 @@ Shader "Sprites/Cone"
 
 			fixed4 SpriteFrag2(v2f IN) : SV_Target
 			{
-				fixed4 c = 1;
+				fixed4 c = IN.color;
 				fixed4 mask = SampleSpriteTexture(IN.texcoord);
 				fixed radius = length(-IN.texcoord.xy + fixed2(0.5, 1)) * rsqrt(2);
 				fixed rad = frac(radius * _WaveRepeat + _WavePhase);
 				fixed prop = smoothstep(_WaveStart - _WaveBlur, _WaveStart + _WaveBlur, rad);
 				prop *= smoothstep(_WaveEnd + _WaveBlur, _WaveEnd - _WaveBlur, rad);
-				c.a = prop * _WaveBoost;
+				c.a *= prop * _WaveBoost;
 				c.a *= mask.g;
 				c.rgb *= c.a;
 				return c;

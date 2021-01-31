@@ -53,7 +53,7 @@ public class SoundManager : MonoBehaviour
 		if (_other.isPlaying) _other.Stop();
 	}
 
-	public void CrossFade(AudioClip clip, float duration)
+	public void CrossFade(AudioClip clip, float duration, float delay = 0f)
 	{
 		DOTween.Kill(_tweenId);
 		if (!_current.isPlaying && !_other.isPlaying)
@@ -63,6 +63,7 @@ public class SoundManager : MonoBehaviour
 			_current.Play();
 			DOVirtual
 				.Float(0f, 1f, duration, val => { _current.volume = val; })
+				.SetDelay(delay)
 				.SetId(_tweenId);
 		}
 		else
@@ -79,6 +80,7 @@ public class SoundManager : MonoBehaviour
 					_other.volume = val;
 					_current.volume = 1f - val;
 				})
+				.SetDelay(delay)
 				.OnComplete(() =>
 				{
 					_current.Stop();

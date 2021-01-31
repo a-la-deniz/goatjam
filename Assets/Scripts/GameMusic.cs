@@ -8,6 +8,8 @@ public class GameMusic : MonoBehaviour
 	[SerializeField] private GameController _game;
 	[SerializeField] private AudioClip _gameMusic;
 	[SerializeField] private AudioClip _gameEndMusic;
+	[SerializeField] private AudioClip _win;
+	[SerializeField] private AudioClip _lose;
 
 	private void Awake()
 	{
@@ -27,8 +29,14 @@ public class GameMusic : MonoBehaviour
 				SoundManager.Instance.CrossFade(_gameMusic, 0.2f);
 				break;
 			case GameController.GameState.Won:
+				SoundManager.Instance.Stop();
+				SoundManager.Instance.PlayOneShot(_win);
+				SoundManager.Instance.CrossFade(_gameEndMusic, 0.2f, 0.5f);
+				break;
 			case GameController.GameState.Lost:
-				SoundManager.Instance.CrossFade(_gameEndMusic, 0.2f);
+				SoundManager.Instance.Stop();
+				SoundManager.Instance.PlayOneShot(_lose);
+				SoundManager.Instance.CrossFade(_gameEndMusic, 0.2f, 0.5f);
 				break;
 		}
 	}

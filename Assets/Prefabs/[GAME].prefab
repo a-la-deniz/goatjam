@@ -82,3 +82,5 @@ MonoBehaviour:
   _game: {fileID: 6882848248582846374}
   _gameMusic: {fileID: 8300000, guid: af8aea0f973b03141a540e394d822b3e, type: 3}
   _gameEndMusic: {fileID: 8300000, guid: fca83f5f4c6ec1a4e88348592da4c63d, type: 3}
+  _win: {fileID: 8300000, guid: 9436995c04a9ea948bfcd4511cccea47, type: 3}
+  _lose: {fileID: 8300000, guid: 2cd79462f7a171a42b0830a7a51b2157, type: 3}

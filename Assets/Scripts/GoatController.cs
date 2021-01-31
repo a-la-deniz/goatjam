@@ -9,17 +9,18 @@ public class GoatController : MonoBehaviour
 {
 	[SerializeField] private float          _speed = 1f;
 	[SerializeField] private GameObject     _coneParent;
-	[SerializeField] private Cone           _closeCone;
+	[SerializeField] private Collider2D     _closeCollider;
 	[SerializeField] private Cone           _farCone;
 	[SerializeField] private SpriteRenderer _spriteRenderer;
 	[SerializeField] private Animator       _animator;
-	[SerializeField, Range(0,1)] private float _rareChance;
+
+	[SerializeField, Range(0, 1)] private float _rareChance;
 
 
 	[Header("Sfx")]
 	[SerializeField] private List<AudioClip> _screamClips;
 	[SerializeField] private List<AudioClip> _rareScreamClips;
-	[SerializeField] private AudioSource _source;
+	[SerializeField] private AudioSource     _source;
 
 
 	private Rigidbody2D _rigidbody2D;
@@ -33,6 +34,11 @@ public class GoatController : MonoBehaviour
 
 	private static readonly int BHolding   = Animator.StringToHash("bHolding");
 	private static readonly int BScreaming = Animator.StringToHash("bScreaming");
+
+	private static readonly ContactFilter2D _contactFilter2D = new ContactFilter2D()
+															   {
+																	   useTriggers = true
+															   };
 
 	public GoatBack Back { get; private set; }
 
@@ -89,7 +95,7 @@ public class GoatController : MonoBehaviour
 			// new kids coming in can respond while scream is going on
 
 			var camFrustum = GeometryUtility.CalculateFrustumPlanes(mainCamera);
-			_closeCone.GetOverlap(_closeScreamResults);
+			Physics2D.OverlapCollider(_closeCollider, _contactFilter2D, _closeScreamResults);
 			_farCone.GetOverlap(_farScreamResults);
 
 			var goatKidsToAppear = _closeScreamResults.Select(r => r.gameObject.GetComponent<GoatKid>())
@@ -133,9 +139,9 @@ public class GoatController : MonoBehaviour
 	private void PlayScream()
 	{
 		_source.Stop();
-		var rare = Random.value > (1-_rareChance);
+		var rare = Random.value > (1 - _rareChance);
 		var randomList = rare ? _rareScreamClips : _screamClips;
-		var i =Random.Range(0, randomList.Count);
+		var i = Random.Range(0, randomList.Count);
 		var clip = randomList[i];
 		_source.clip = clip;
 		_source.Play();

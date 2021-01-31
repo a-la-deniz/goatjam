@@ -13,8 +13,9 @@ Shader "Sprites/Cone"
 		[PerRendererData] _EnableExternalAlpha("Enable External Alpha", Float) = 0
 
 		_WaveStart("WaveStart", Range(0,1)) = 0
-		_WaveEnd("WaveEnd", Range(0,1)) = 0
-		_WaveBlur("WaveBlur", Range(0,1)) = 0
+		_WaveEnd("WaveEnd", Range(0,1)) = 1
+		_WaveBlur("WaveBlur", Range(0,1)) = 0.008
+		_WaveBoost("WaveBoost", Range(1,10)) = 1
     }
 
     SubShader
@@ -47,15 +48,21 @@ Shader "Sprites/Cone"
 			fixed _WaveStart;
 			fixed _WaveEnd;
 			fixed _WaveBlur;
+			fixed _WaveBoost;
+
+			float Remap(float value, float from1, float to1, float from2, float to2)
+			{
+				return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
+			}
 
 			fixed4 SpriteFrag2(v2f IN) : SV_Target
 			{
-				fixed4 c = IN.color;
+				fixed4 c = 1;
 				fixed4 mask = SampleSpriteTexture(IN.texcoord);
-				fixed a = 1 - mask.b;
+				fixed a = length(-IN.texcoord.xy + fixed2(0.5, 1)) * rsqrt(2);
 				fixed prop = smoothstep(_WaveStart - _WaveBlur, _WaveStart + _WaveBlur,a);
 				prop *= smoothstep(_WaveEnd + _WaveBlur, _WaveEnd - _WaveBlur, a);
-				c.a = prop;
+				c.a = prop * _WaveBoost;
 				c.a *= mask.g;
 				c.rgb *= c.a;
 				return c;

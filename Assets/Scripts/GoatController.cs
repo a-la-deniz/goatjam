@@ -25,8 +25,8 @@ public class GoatController : MonoBehaviour
 	private List<Collider2D> _farScreamResults   = new List<Collider2D>();
 
 	private                 bool _previousScream;
-	private static readonly int  BHolding = Animator.StringToHash("bHolding");
-	private static readonly int BScreaming = Animator.StringToHash("bScreaming");
+	private static readonly int  BHolding   = Animator.StringToHash("bHolding");
+	private static readonly int  BScreaming = Animator.StringToHash("bScreaming");
 
 	public GoatBack Back { get; private set; }
 
@@ -49,12 +49,15 @@ public class GoatController : MonoBehaviour
 		float rotZ = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
 		var rotation = Quaternion.Euler(0f, 0f, rotZ + 90);
 
-		_coneParent.transform.rotation = rotation;
+		var animatorState = _animator.GetCurrentAnimatorStateInfo(0);
+		var canScream = !_source.isPlaying && (animatorState.IsName("Idle") || _animator.GetBool(BHolding));
+
+		if (canScream) _coneParent.transform.rotation = rotation;
 
 		var hold = Input.GetAxis("Fire1") > 0;
 
 		// start holding
-		if (!_previousScream && hold && !_source.isPlaying)
+		if (!_previousScream && hold && canScream)
 		{
 			_animator.SetBool(BHolding, true);
 		}
@@ -69,6 +72,7 @@ public class GoatController : MonoBehaviour
 		{
 			_animator.SetBool(BHolding, false);
 		}
+
 		if (!_source.isPlaying)
 		{
 			_animator.SetBool(BScreaming, false);

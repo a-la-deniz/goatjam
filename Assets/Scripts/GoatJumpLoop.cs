@@ -8,6 +8,9 @@ public class GoatJumpLoop : MonoBehaviour
 {
 	[SerializeField] private SpriteRenderer _jump;
 	[SerializeField] private float _jumpHeight = 0.5f;
+	[SerializeField] private Sprite _downSprite;
+	[SerializeField] private Sprite _upSprite;
+
 	private Rigidbody2D _rb;
 	private object _tweenId = new object();
 
@@ -54,6 +57,9 @@ public class GoatJumpLoop : MonoBehaviour
 		}
 		_wasStopped = stopped;
 		_wasFlipped = _jump.transform.localScale.x < 0f;
+
+		var up = _jump.transform.localPosition.y - _originalPosition > _jumpHeight * 0.5f;
+		_jump.sprite = up ? _upSprite : _downSprite;
 	}
 
 	private void SetFlip(bool flip)

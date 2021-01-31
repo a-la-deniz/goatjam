@@ -321,6 +321,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _jump: {fileID: 5310983311525311582}
   _jumpHeight: 0.2
+  _downSprite: {fileID: -5084521895929076010, guid: 5926096fc1b726545ab4020166e1996a,
+    type: 3}
+  _upSprite: {fileID: 5227176094090392916, guid: 5926096fc1b726545ab4020166e1996a,
+    type: 3}
 --- !u!95 &8586832588731262182
 Animator:
   serializedVersion: 3
@@ -428,7 +432,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3c5342ffb4a198144bc3b2a64f4dcb8f, type: 3}
+  m_Sprite: {fileID: 5227176094090392916, guid: 5926096fc1b726545ab4020166e1996a,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

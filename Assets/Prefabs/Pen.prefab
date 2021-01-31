@@ -1166,7 +1166,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Bring the kids here before time's up
+  m_text: Bring 4 kids here before time's up
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4ff3ee0282cfddc4e914c5498ca31cf8, type: 2}
   m_sharedMaterial: {fileID: 6099042051906044893, guid: 4ff3ee0282cfddc4e914c5498ca31cf8,

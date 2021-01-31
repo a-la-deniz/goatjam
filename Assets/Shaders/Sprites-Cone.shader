@@ -16,6 +16,8 @@ Shader "Sprites/Cone"
 		_WaveEnd("WaveEnd", Range(0,1)) = 1
 		_WaveBlur("WaveBlur", Range(0,1)) = 0.008
 		_WaveBoost("WaveBoost", Range(1,10)) = 1
+		_WaveRepeat("WaveRepeat", float) = 0
+		_WavePhase("WavePhase", float) = 0
     }
 
     SubShader
@@ -49,6 +51,8 @@ Shader "Sprites/Cone"
 			fixed _WaveEnd;
 			fixed _WaveBlur;
 			fixed _WaveBoost;
+			fixed _WaveRepeat;
+			fixed _WavePhase;
 
 			float Remap(float value, float from1, float to1, float from2, float to2)
 			{
@@ -59,9 +63,10 @@ Shader "Sprites/Cone"
 			{
 				fixed4 c = 1;
 				fixed4 mask = SampleSpriteTexture(IN.texcoord);
-				fixed a = length(-IN.texcoord.xy + fixed2(0.5, 1)) * rsqrt(2);
-				fixed prop = smoothstep(_WaveStart - _WaveBlur, _WaveStart + _WaveBlur,a);
-				prop *= smoothstep(_WaveEnd + _WaveBlur, _WaveEnd - _WaveBlur, a);
+				fixed radius = length(-IN.texcoord.xy + fixed2(0.5, 1)) * rsqrt(2);
+				fixed rad = frac(radius * _WaveRepeat + _WavePhase);
+				fixed prop = smoothstep(_WaveStart - _WaveBlur, _WaveStart + _WaveBlur, rad);
+				prop *= smoothstep(_WaveEnd + _WaveBlur, _WaveEnd - _WaveBlur, rad);
 				c.a = prop * _WaveBoost;
 				c.a *= mask.g;
 				c.rgb *= c.a;

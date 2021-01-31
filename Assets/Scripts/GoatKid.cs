@@ -72,6 +72,15 @@ public class GoatKid : MonoBehaviour
 		if (GeometryUtility.TestPlanesAABB(cameraFrustum, _spriteRenderer.bounds))
 		{
 			Debug.Log($"{this} should respond to parent now ON SCREEN", this);
+			var kidTransform = transform;
+			var kidPosition = kidTransform.position;
+			var kidOnViewport = mainCamera.WorldToViewportPoint(kidPosition);
+			var kidOnClipX = kidOnViewport.x.Remap(0, 1, -1, 1);
+			var kidOnClipY = kidOnViewport.y.Remap(0, 1, -1, 1);
+			var responseOnClipX = kidOnClipX;
+			var responseOnClipY = kidOnClipY;
+
+			ScreamVisualsProvider.CreateScream(responseOnClipX, responseOnClipY);
 		}
 		else
 		{

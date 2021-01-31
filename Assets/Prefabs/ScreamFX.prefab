@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7468689712713563974}
   - component: {fileID: 977818053364165485}
   - component: {fileID: 4116939485187827364}
+  - component: {fileID: 774209271033826230}
   m_Layer: 0
   m_Name: ScreamFX
   m_TagString: Untagged
@@ -216,3 +217,14 @@ MonoBehaviour:
   - MHHHAAAHHAA!
   - Agggaaa!!
   - BAAABABABABA!
+--- !u!210 &774209271033826230
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3251838380503256391}
+  m_Enabled: 1
+  m_SortingLayerID: 392805223
+  m_SortingLayer: 1
+  m_SortingOrder: 100

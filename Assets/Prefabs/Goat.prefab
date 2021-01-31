@@ -217,8 +217,11 @@ MonoBehaviour:
   _farCone: {fileID: 3091914258861617453}
   _spriteRenderer: {fileID: 5310983311525311582}
   _animator: {fileID: 8586832588731262182}
+  _rareChance: 0.1
   _screamClips:
   - {fileID: 8300000, guid: 548d72a55f6ae5e48831cebcc8a19550, type: 3}
+  _rareScreamClips:
+  - {fileID: 8300000, guid: 386cb57515b36db4b8b5f0f132b10910, type: 3}
   _source: {fileID: 368667112729522660}
 --- !u!50 &5310983310657304026
 Rigidbody2D:

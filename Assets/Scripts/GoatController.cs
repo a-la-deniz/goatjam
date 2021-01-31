@@ -13,10 +13,12 @@ public class GoatController : MonoBehaviour
 	[SerializeField] private Cone           _farCone;
 	[SerializeField] private SpriteRenderer _spriteRenderer;
 	[SerializeField] private Animator       _animator;
+	[SerializeField, Range(0,1)] private float _rareChance;
 
 
 	[Header("Sfx")]
 	[SerializeField] private List<AudioClip> _screamClips;
+	[SerializeField] private List<AudioClip> _rareScreamClips;
 	[SerializeField] private AudioSource _source;
 
 
@@ -131,8 +133,10 @@ public class GoatController : MonoBehaviour
 	private void PlayScream()
 	{
 		_source.Stop();
-		var i =Random.Range(0, _screamClips.Count);
-		var clip = _screamClips[i];
+		var rare = Random.value > (1-_rareChance);
+		var randomList = rare ? _rareScreamClips : _screamClips;
+		var i =Random.Range(0, randomList.Count);
+		var clip = randomList[i];
 		_source.clip = clip;
 		_source.Play();
 	}

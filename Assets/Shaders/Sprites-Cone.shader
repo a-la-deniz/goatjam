@@ -1,6 +1,6 @@
 // Unity built-in shader source. Copyright (c) 2016 Unity Technologies. MIT license (see license.txt)
 
-Shader "Sprites/Default-Dup"
+Shader "Sprites/Cone"
 {
     Properties
     {
@@ -14,6 +14,7 @@ Shader "Sprites/Default-Dup"
 
 		_WaveStart("WaveStart", Range(0,1)) = 0
 		_WaveEnd("WaveEnd", Range(0,1)) = 0
+		_WaveBlur("WaveBlur", Range(0,1)) = 0
     }
 
     SubShader
@@ -45,13 +46,16 @@ Shader "Sprites/Default-Dup"
 
 			fixed _WaveStart;
 			fixed _WaveEnd;
+			fixed _WaveBlur;
 
 			fixed4 SpriteFrag2(v2f IN) : SV_Target
 			{
 				fixed4 c = IN.color;
 				fixed4 mask = SampleSpriteTexture(IN.texcoord);
 				fixed a = 1 - mask.b;
-				clip(a < _WaveStart || a > _WaveEnd ? -1 : 1);
+				fixed prop = smoothstep(_WaveStart - _WaveBlur, _WaveStart + _WaveBlur,a);
+				prop *= smoothstep(_WaveEnd + _WaveBlur, _WaveEnd - _WaveBlur, a);
+				c.a = prop;
 				c.a *= mask.g;
 				c.rgb *= c.a;
 				return c;

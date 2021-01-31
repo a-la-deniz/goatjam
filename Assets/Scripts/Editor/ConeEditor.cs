@@ -14,6 +14,9 @@ public class ConeEditor : Editor
 		{
 			collider = cone.GetComponentInChildren<PolygonCollider2D>();
 		}
+		var spriteRenderer = cone.SpriteRoot.GetComponentInChildren<SpriteRenderer>(true);
+		var size = spriteRenderer.sprite.bounds.size.y;
+		var halfSize = size * 0.5f;
 
 		var pts = collider.points;
 
@@ -22,8 +25,8 @@ public class ConeEditor : Editor
 			pts = new[]
 				  {
 						  new Vector2(0, 0.0f),
-						  new Vector2(0.32f, 0.64f),
-						  new Vector2(-0.32f, 0.64f)
+						  new Vector2(halfSize , size),
+						  new Vector2(-halfSize, size)
 				  };
 		}
 
@@ -42,13 +45,20 @@ public class ConeEditor : Editor
 		pts[1].y = pts[0].y + range;
 		pts[2] = pts[1];
 		pts[2].x = -pts[2].x;
-		var defaultX = 0.64f;
-		var defaultY = 0.64f;
+		var defaultX = size;
+		var defaultY = size;
+		var spriteRendererTransform = spriteRenderer.transform;
+		var pos = spriteRendererTransform.localPosition;
+		pos.y = halfSize;
+		spriteRendererTransform.localPosition = pos;
 		cone.SpriteRoot.localScale = new Vector3(pts[1].x * 2 / defaultX, range / defaultY, 1);
 		collider.points = pts;
 
+
 		if (previousAngle != angle || previousRange != range)
 		{
+			EditorUtility.SetDirty(spriteRendererTransform);
+			EditorUtility.SetDirty(cone.SpriteRoot);
 			EditorUtility.SetDirty(collider);
 			EditorUtility.SetDirty(target);
 		}

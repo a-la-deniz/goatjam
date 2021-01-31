@@ -7,6 +7,7 @@ using UnityEngine;
 public class GoatController : MonoBehaviour
 {
 	[SerializeField] private float          _speed = 1f;
+	[SerializeField] private GameObject     _coneParent;
 	[SerializeField] private Cone           _closeCone;
 	[SerializeField] private Cone           _farCone;
 	[SerializeField] private SpriteRenderer _spriteRenderer;
@@ -45,8 +46,7 @@ public class GoatController : MonoBehaviour
 		float rotZ = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
 		var rotation = Quaternion.Euler(0f, 0f, rotZ + 90);
 
-		_closeCone.transform.rotation = rotation;
-		_farCone.transform.rotation = rotation;
+		_coneParent.transform.rotation = rotation;
 
 		var scream = Input.GetAxis("Fire1") > 0;
 		if (!_previousScream && scream)
@@ -77,7 +77,7 @@ public class GoatController : MonoBehaviour
 
 		_previousScream = scream;
 
-		_spriteRenderer.sortingOrder = (int)(_spriteRenderer.bounds.min).y * -1;
+		_spriteRenderer.sortingOrder = (int) (_spriteRenderer.bounds.min).y * -1;
 		foreach (var backGoatKid in Back.GoatKids)
 		{
 			backGoatKid.SpriteRenderer.sortingOrder = _spriteRenderer.sortingOrder;

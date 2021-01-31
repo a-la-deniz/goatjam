@@ -77,9 +77,14 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _WaveBlur: 0.093
-    - _WaveEnd: 0.412
-    - _WaveStart: 0.274
+    - _WaveBlur: 0
+    - _WaveBoost: 1
+    - _WaveCenter: 0.34
+    - _WaveEnd: 0
+    - _WavePhase: 0
+    - _WaveRange: 0.044
+    - _WaveRepeat: 1
+    - _WaveStart: 0
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}

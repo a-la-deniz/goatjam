@@ -7,8 +7,9 @@ using UnityEngine;
 public class EndResult : MonoBehaviour
 {
 	[SerializeField] private GameController _game;
-	[SerializeField] private TMP_Text _commonText;
+	[SerializeField] private TMP_Text _winDetails;
 	[SerializeField] private GameObject _goat;
+	[SerializeField] private GameObject _baahd;
 
 	private void Start()
 	{
@@ -24,16 +25,16 @@ public class EndResult : MonoBehaviour
 	private void OnStateChanged(GameController.GameState state)
 	{
 		_goat.SetActive(state == GameController.GameState.Won);
+		_baahd.SetActive(state == GameController.GameState.Lost);
 		switch (state)
 		{
 			case GameController.GameState.Won:
 				var span = TimeSpan.FromSeconds(_game.TimeLeft);
 				var text = span.ToString("m':'ss':'ff");
-				_commonText.text = $"You win with {text} time left!";
+				_winDetails.text = $"You win with {text} time left!";
 				gameObject.SetActive(true);
 				break;
 			case GameController.GameState.Lost:
-				_commonText.text = $"You lose, boooooo!";
 				gameObject.SetActive(true);
 				break;
 		}

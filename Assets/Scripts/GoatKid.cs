@@ -140,9 +140,7 @@ public class GoatKid : MonoBehaviour
 	public void HideInBush(Bush bush)
 	{
 		_bush = bush;
-		var pos = transform.position;
-		pos.z = _bushOffsetZ + _bushOffsetZ;
-		transform.position = pos;
+		_spriteRenderer.sortingOrder = _bush.Renderer.sortingOrder - 1;
 	}
 
 	public void JumpFromBush()
@@ -155,9 +153,7 @@ public class GoatKid : MonoBehaviour
 			.Append(transform.DOMoveY(_bushJumoOffsetY, 0.2f).SetRelative())
 			.AppendCallback(() =>
 			{
-				var pos = transform.position;
-				pos.z = _bushOffsetZ - _bushOffsetZ;
-				transform.position = pos;
+				_spriteRenderer.sortingOrder = _bush.Renderer.sortingOrder + 1;
 			})
 			.Append(transform.DOMoveY(-_bushJumoOffsetY, 0.2f).SetRelative())
 			.OnComplete(OnOutsideBush)

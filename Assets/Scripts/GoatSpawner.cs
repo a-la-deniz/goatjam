@@ -12,7 +12,7 @@ public class GoatSpawner : MonoBehaviour
 
 	[SerializeField] private List<AudioClip> _screamClips;
 
-	private void Awake()
+	private void Start()
 	{
 		var rnd = new System.Random();
 		var bushes = _bushesParent

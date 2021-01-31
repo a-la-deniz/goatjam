@@ -659,22 +659,22 @@ PrefabInstance:
     - target: {fileID: 120045620221834922, guid: 7c84d88950b01914c8a72fd366e6c3ae,
         type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].x
-      value: 0.9923241
+      value: 1.6102223
       objectReference: {fileID: 0}
     - target: {fileID: 120045620221834922, guid: 7c84d88950b01914c8a72fd366e6c3ae,
         type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].y
-      value: 2.6
+      value: 2.1
       objectReference: {fileID: 0}
     - target: {fileID: 120045620221834922, guid: 7c84d88950b01914c8a72fd366e6c3ae,
         type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].x
-      value: -0.9923241
+      value: -1.6102223
       objectReference: {fileID: 0}
     - target: {fileID: 120045620221834922, guid: 7c84d88950b01914c8a72fd366e6c3ae,
         type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].y
-      value: 2.6
+      value: 2.1
       objectReference: {fileID: 0}
     - target: {fileID: 120045620549181746, guid: 7c84d88950b01914c8a72fd366e6c3ae,
         type: 3}
@@ -694,12 +694,12 @@ PrefabInstance:
     - target: {fileID: 120045621151554936, guid: 7c84d88950b01914c8a72fd366e6c3ae,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.101013
+      value: 5.0319448
       objectReference: {fileID: 0}
     - target: {fileID: 120045621151554936, guid: 7c84d88950b01914c8a72fd366e6c3ae,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 4.0625
+      value: 3.28125
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c84d88950b01914c8a72fd366e6c3ae, type: 3}

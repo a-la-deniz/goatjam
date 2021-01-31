@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Util;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(GoatBack))]
@@ -55,18 +56,40 @@ public class GoatController : MonoBehaviour
 		_rigidbody2D.velocity = direction.normalized * _speed;
 
 		var mainCamera = Camera.main;
-		var mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+		var rotation = _coneParent.transform.rotation;
+
+		var hold = false;
+		var pitch = Input.GetAxisRaw("Pitch");
+		var roll = Input.GetAxisRaw("Roll");
+		var mousePos = Vector3.zero;
+		if (Mathf.Abs(pitch) > 0 || Mathf.Abs(roll) > 0)
+		{
+			var waveDirection = new Vector2(roll, pitch);
+			
+			mousePos = mainCamera.ViewportToWorldPoint(new Vector3(
+					roll.Remap(-1,1, 1, 0), 
+					pitch.Remap(-1, 1, 1, 0)));
+			Debug.Log(new Vector3(roll, pitch, waveDirection.magnitude));
+			Debug.Log(mousePos);
+
+			hold = waveDirection.magnitude > 0.9f;
+		}
+		else
+		{
+			mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+
+			hold = Input.GetAxis("Fire1") > 0;
+		}
+
 		var diff = transform.position - mousePos;
 
 		float rotZ = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-		var rotation = Quaternion.Euler(0f, 0f, rotZ + 90);
+		rotation = Quaternion.Euler(0f, 0f, rotZ + 90);
 
 		var animatorState = _animator.GetCurrentAnimatorStateInfo(0);
 		var canScream = !_source.isPlaying && (animatorState.IsName("Idle") || _animator.GetBool(BHolding));
 
 		if (canScream) _coneParent.transform.rotation = rotation;
-
-		var hold = Input.GetAxis("Fire1") > 0;
 
 		// start holding
 		if (!_previousScream && hold && canScream)

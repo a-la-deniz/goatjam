@@ -58,6 +58,7 @@ public class ScreamVisualsProvider : MonoBehaviour
 	{
 		if (_instance == this)
 		{
+			Screams.Clear();
 			_instance = null;
 		}
 	}

@@ -55,8 +55,6 @@ public class SoundManager : MonoBehaviour
 
 	public void CrossFade(AudioClip clip, float duration)
 	{
-		if (_current.isPlaying && _current.clip == clip) return;
-
 		DOTween.Kill(_tweenId);
 		if (!_current.isPlaying && !_other.isPlaying)
 		{

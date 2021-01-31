@@ -114,9 +114,10 @@ public class GoatController : MonoBehaviour
 		_previousScream = hold;
 
 		_spriteRenderer.sortingOrder = (int) (_spriteRenderer.bounds.min).y * -1;
-		foreach (var backGoatKid in Back.GoatKids)
+		for (int i = 0; i < Back.GoatKids.Count; i++)
 		{
-			backGoatKid.SpriteRenderer.sortingOrder = _spriteRenderer.sortingOrder;
+			var kid = Back.GoatKids.ElementAt(i);
+			kid.SpriteRenderer.sortingOrder = _spriteRenderer.sortingOrder + i + 1;
 		}
 	}
 
